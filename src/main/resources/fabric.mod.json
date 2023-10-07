@@ -1,0 +1,33 @@
+{
+	"schemaVersion": 1,
+	"id": "toggle-end",
+	"version": "${version}",
+	"name": "Toggle End",
+	"description": "Toggle The End Portal's Ability to teleport players across dimensions",
+	"authors": [
+		"Jack"
+	],
+	"contact": {
+		"homepage": "https://maven.lemonlime.tech/",
+		"sources": "https://github.com/JackTheDevel0per/ToggleEnd"
+	},
+	"license": "MIT",
+	"icon": "assets/toggle-end/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"tech.lemonlime.ToggleEnd.ToggleEnd"
+		]
+	},
+	"mixins": [
+		"toggle-end.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.14.14",
+		"minecraft": "1.19.x",
+		"java": ">=17",
+		"betterconfig": "*"
+	},
+	"suggests": {
+	}
+}
