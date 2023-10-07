@@ -9,5 +9,13 @@ public class Settings {
     public static boolean enableEnd = true;
 
 
+    @Config
+    public static boolean enableEndGateways = true;
+
+
+    @Config
+    public static boolean enableNether = true;
+
+
 
 }
