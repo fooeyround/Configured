@@ -18,7 +18,11 @@ public class Configured implements ModInitializer {
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
 
-		new ModConfigBuilder("toggleend", Settings.class).build();
+		new ModConfigBuilder("configured", Settings.class).build();
+
+		new ModConfigBuilder("configured-fixes", Fixes.class).build();
+
+
 
 		LOGGER.info("Toggle End Loaded!");
 	}
