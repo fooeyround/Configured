@@ -8,6 +8,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import tech.lemonlime.ToggleEnd.Settings;
+import tech.lemonlime.ToggleEnd.util.TextHelper;
 
 @Mixin(ServerMetadata.class)
 public class ServerMetadataMixin {
@@ -19,7 +20,7 @@ public class ServerMetadataMixin {
 
 
         if (!Settings.motd.equals("_")) {
-            cir.setReturnValue(Text.literal(Settings.motd.replace("_","")));
+            cir.setReturnValue(TextHelper.literal(Settings.motd.replace("_","")));
         }
 
     }
