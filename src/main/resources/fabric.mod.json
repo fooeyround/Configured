@@ -1,9 +1,9 @@
 {
 	"schemaVersion": 1,
-	"id": "toggle-end",
+	"id": "configurable",
 	"version": "${version}",
-	"name": "Toggle End",
-	"description": "Toggle The End Portal's Ability to teleport players across dimensions",
+	"name": "Configurable",
+	"description": "Take control over many of minecraft's features.",
 	"authors": [
 		"Jack"
 	],
