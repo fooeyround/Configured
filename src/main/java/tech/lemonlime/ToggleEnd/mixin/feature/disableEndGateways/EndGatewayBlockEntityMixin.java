@@ -1,4 +1,4 @@
-package tech.lemonlime.ToggleEnd.mixin;
+package tech.lemonlime.ToggleEnd.mixin.feature.disableEndGateways;
 
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
@@ -11,7 +11,7 @@ import tech.lemonlime.ToggleEnd.Settings;
 public class EndGatewayBlockEntityMixin {
 
     @ModifyExpressionValue(method = "serverTick", at = @At(value = "INVOKE", target = "Ljava/util/List;isEmpty()Z"))
-    private static boolean toggleEnd$conditionalGatewayTeleport(boolean original) {
+    private static boolean configured$conditionalGatewayTeleport(boolean original) {
         return original || Settings.disableEndGateways;
     }
 

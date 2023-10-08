@@ -1,4 +1,4 @@
-package tech.lemonlime.ToggleEnd.mixin;
+package tech.lemonlime.ToggleEnd.mixin.feature.disableEndPortalFrameFilling;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.EnderEyeItem;
@@ -20,16 +20,9 @@ public class EnderEyeItemMixin {
 
 
     @Inject(method="useOnBlock",at=@At("HEAD"), cancellable = true)
-    private void toggleEnd$conditionalEndPortalFrameFilling(ItemUsageContext context, CallbackInfoReturnable<ActionResult> cir) {
+    private void configured$conditionalEndPortalFrameFilling(ItemUsageContext context, CallbackInfoReturnable<ActionResult> cir) {
         if (Settings.disableEndPortalFrameFilling) {
             cir.setReturnValue(ActionResult.PASS);
-        }
-    }
-
-    @Inject(method = "use", at= @At(value = "HEAD"), cancellable = true)
-    private void toggleEnd$conditionalEnderEyeCasting(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> cir) {
-        if (Settings.disableEyeOfEnderCasting) {
-            cir.setReturnValue(TypedActionResult.pass(user.getStackInHand(hand)));
         }
     }
 
