@@ -1,10 +1,8 @@
-package tech.lemonlime.ToggleEnd.mixin.feature.disableEyeOfEnderCasting;
+package tech.lemonlime.Configurable.mixin.feature.disableEyeOfEnderCasting;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.EnderEyeItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUsageContext;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
@@ -12,7 +10,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import tech.lemonlime.ToggleEnd.Settings;
+import tech.lemonlime.Configurable.Settings;
 
 
 @Mixin(EnderEyeItem.class)

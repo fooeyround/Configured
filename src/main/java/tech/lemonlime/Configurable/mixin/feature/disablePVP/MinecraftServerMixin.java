@@ -1,4 +1,4 @@
-package tech.lemonlime.ToggleEnd.mixin.feature.disablePVP;
+package tech.lemonlime.Configurable.mixin.feature.disablePVP;
 
 
 import net.minecraft.server.MinecraftServer;
@@ -6,7 +6,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import tech.lemonlime.ToggleEnd.Settings;
+import tech.lemonlime.Configurable.Settings;
 
 @Mixin(MinecraftServer.class)
 public class MinecraftServerMixin {

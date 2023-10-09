@@ -1,6 +1,6 @@
 {
   "required": true,
-  "package": "tech.lemonlime.ToggleEnd.mixin",
+  "package": "tech.lemonlime.Configurable.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "feature.disableEnd.EndPortalBlockMixin",
@@ -10,7 +10,8 @@
     "feature.disablePlayerConnections.PlayerManagerMixin",
     "feature.disablePVP.MinecraftServerMixin",
     "feature.fakeHardcore.PlayerManagerMixin",
-    "feature.motd.ServerMetadataMixin"
+    "feature.motd.ServerMetadataMixin",
+    "fix.stringDupeFix.TripwireBlockMixin"
   ],
   "injectors": {
     "defaultRequire": 1

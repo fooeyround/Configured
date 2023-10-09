@@ -1,8 +1,8 @@
-package tech.lemonlime.ToggleEnd.mixin.feature.disableNether;
+package tech.lemonlime.Configurable.mixin.feature.disableEnd;
 
 
 import net.minecraft.block.BlockState;
-import net.minecraft.block.NetherPortalBlock;
+import net.minecraft.block.EndPortalBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -10,26 +10,18 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import tech.lemonlime.ToggleEnd.Settings;
+import tech.lemonlime.Configurable.Settings;
 
-@Mixin(NetherPortalBlock.class)
-public class NetherPortalBlockMixin {
-
-
+@Mixin(EndPortalBlock.class)
+public class EndPortalBlockMixin {
 
 
     @Inject(method="onEntityCollision",at=@At("HEAD"), cancellable = true)
-    private void configured$conditionalNetherPortalTravel(BlockState state, World world, BlockPos pos, Entity entity, CallbackInfo ci) {
-        if (Settings.disableNether) {
+    private void configured$conditionalEndPortalTravel(BlockState state, World world, BlockPos pos, Entity entity, CallbackInfo ci) {
+        if (Settings.disableEnd) {
             ci.cancel();
         }
-
     }
-
-
-
-
-
 
 
 

@@ -1,4 +1,4 @@
-package tech.lemonlime.ToggleEnd;
+package tech.lemonlime.Configurable;
 
 import dev.xpple.betterconfig.api.Config;
 
