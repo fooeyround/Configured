@@ -6,6 +6,7 @@
     "feature.disableEnd.EndPortalBlockMixin",
     "feature.disableEndGateways.EndGatewayBlockEntityMixin",
     "feature.disableEndPortalFrameFilling.EnderEyeItemMixin",
+    "feature.disableEyeOfEnderCasting.EnderEyeItemMixin",
     "feature.disableNether.NetherPortalBlockMixin",
     "feature.disablePlayerConnections.PlayerManagerMixin",
     "feature.disablePVP.MinecraftServerMixin",
