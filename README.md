@@ -1,11 +1,11 @@
-# ToggleEnd
+# Configured
 
 
 
-This mod allows you to toggle dimentions with commands, (saves across restarts)
+This mod allows you to toggle game mechanics with commands.
 
 
-**I might change the confing semantics in the future!**
+**I might change the config syntax in the future!**
 
 
 By default vanilla mechanics are unchanged, the following commands can be used to customize the features of this mod:
