@@ -1,4 +1,4 @@
-package tech.lemonlime.Configurable.mixin.fix.stringDupeFix;
+package tech.lemonlime.configured.mixin.fix.stringDupeFix;
 
 
 
@@ -6,7 +6,7 @@ import net.minecraft.block.TripwireBlock;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
-import tech.lemonlime.Configurable.Fixes;
+import tech.lemonlime.configured.Fixes;
 
 /**
  * Fixes the wring dupe at the cost of removing the ability to disarm tripwire. Wait you didn't know you could do that?

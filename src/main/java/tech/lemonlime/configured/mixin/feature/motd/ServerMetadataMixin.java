@@ -1,4 +1,4 @@
-package tech.lemonlime.Configurable.mixin.feature.motd;
+package tech.lemonlime.configured.mixin.feature.motd;
 
 
 import net.minecraft.server.ServerMetadata;
@@ -7,8 +7,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import tech.lemonlime.Configurable.Settings;
-import tech.lemonlime.Configurable.util.TextHelper;
+import tech.lemonlime.configured.Settings;
+import tech.lemonlime.configured.util.TextHelper;
 
 @Mixin(ServerMetadata.class)
 public class ServerMetadataMixin {

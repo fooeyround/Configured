@@ -16,7 +16,7 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-          "tech.lemonlime.ToggleEnd.Configured"
+          "tech.lemonlime.configured.Configured"
 		]
 	},
 	"mixins": [

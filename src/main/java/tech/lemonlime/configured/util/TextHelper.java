@@ -1,4 +1,4 @@
-package tech.lemonlime.Configurable.util;
+package tech.lemonlime.configured.util;
 
 
 

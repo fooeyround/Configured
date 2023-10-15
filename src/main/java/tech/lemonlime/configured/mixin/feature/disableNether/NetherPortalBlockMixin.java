@@ -1,4 +1,4 @@
-package tech.lemonlime.Configurable.mixin.feature.disableNether;
+package tech.lemonlime.configured.mixin.feature.disableNether;
 
 
 import net.minecraft.block.BlockState;
@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import tech.lemonlime.Configurable.Settings;
+import tech.lemonlime.configured.Settings;
 
 @Mixin(NetherPortalBlock.class)
 public class NetherPortalBlockMixin {

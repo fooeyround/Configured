@@ -1,4 +1,4 @@
-package tech.lemonlime.Configurable;
+package tech.lemonlime.configured;
 
 import dev.xpple.betterconfig.api.ModConfigBuilder;
 import net.fabricmc.api.ModInitializer;

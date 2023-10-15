@@ -1,11 +1,11 @@
-package tech.lemonlime.Configurable.mixin.feature.fakeHardcore;
+package tech.lemonlime.configured.mixin.feature.fakeHardcore;
 
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import net.minecraft.server.PlayerManager;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import tech.lemonlime.Configurable.Settings;
+import tech.lemonlime.configured.Settings;
 
 @Mixin(PlayerManager.class)
 public abstract class PlayerManagerMixin {

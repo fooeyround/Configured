@@ -1,4 +1,4 @@
-package tech.lemonlime.Configurable.mixin.feature.disablePlayerConnections;
+package tech.lemonlime.configured.mixin.feature.disablePlayerConnections;
 
 
 import com.mojang.authlib.GameProfile;
@@ -9,8 +9,8 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import tech.lemonlime.Configurable.Settings;
-import tech.lemonlime.Configurable.util.TextHelper;
+import tech.lemonlime.configured.Settings;
+import tech.lemonlime.configured.util.TextHelper;
 
 import java.net.SocketAddress;
 
