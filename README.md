@@ -12,8 +12,8 @@ By default vanilla mechanics are unchanged, the following commands can be used t
 
 
 Toggle the End dimension:
-- `/cconfig toggleend enableEnd set (true|false)`
+- `/config configured disableEnd set (true|false)`
 Toggle End Gateway teleportation:
-- `/cconfig toggleend enableEndGateways set (true|false)`
+- `/config configured disableEndGateways set (true|false)`
 Toggle Nether Portal travel:
-- `/cconfig toggleend enableNether set (true|false)`
+- `/config configured disableNether set (true|false)`
