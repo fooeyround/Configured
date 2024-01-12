@@ -24,7 +24,7 @@ public class ServerMetadataMixin {
 
 
         if (!Settings.motd.equals("_")) {
-            cir.setReturnValue(TextHelper.literal(Settings.motd.replace("_","")));
+            cir.setReturnValue(TextHelper.literal(Settings.motd.replace("_"," ")));
         }
 
     }
