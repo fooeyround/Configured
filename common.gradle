@@ -1,6 +1,5 @@
 apply plugin: 'maven-publish'
 apply plugin: 'fabric-loom'
-apply plugin: 'io.github.juuxel.loom-quiltflower'
 apply plugin: 'com.replaymod.preprocess'
 
 int mcVersion = project.mcVersion
@@ -33,10 +32,6 @@ dependencies {
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-	// runtime mods
-//	if (mcVersion < 11904) {
-//		modRuntimeOnly(mcVersion < 11900 ? "com.github.astei:lazydfu:0.1.2" : "com.github.Fallen-Breath:lazydfu:a7cfc44c0c")
-//	}
 
 
 
@@ -67,18 +62,7 @@ sourceCompatibility = JavaVersion.VERSION_17
 targetCompatibility = JavaVersion.VERSION_17
 
 
-/*
-//Use if you want to have different java versions for the mod. I use around the same for them all.
-if (mcVersion >= 11800) {
-	sourceCompatibility = JavaVersion.VERSION_17
-	targetCompatibility = JavaVersion.VERSION_17
-} else if (mcVersion >= 11700) {
-	sourceCompatibility = JavaVersion.VERSION_16
-	targetCompatibility = JavaVersion.VERSION_16
-} else {
-	sourceCompatibility = JavaVersion.VERSION_1_8
-	targetCompatibility = JavaVersion.VERSION_1_8
-}*/
+
 
 String versionSuffix = ''
 // detect github action environment variables
@@ -96,15 +80,11 @@ archivesBaseName = project.archives_base_name + '-mc' + project.minecraft_versio
 // See https://youtrack.jetbrains.com/issue/IDEA-296490
 // if IDEA complains about "Cannot resolve resource filtering of MatchingCopyAction" and you want to know why
 processResources {
-	inputs.property "id", project.mod_id
-	inputs.property "name", project.mod_name
 	inputs.property "version", fullModVersion
 	inputs.property "minecraft_dependency", project.minecraft_dependency
 
 	filesMatching("fabric.mod.json") {
 		def valueMap = [
-				"id": project.mod_id,
-				"name": project.mod_name,
 				"version": fullModVersion,
 				"minecraft_dependency": project.minecraft_dependency,
 		]
@@ -151,16 +131,5 @@ publishing {
 	repositories {
 		// mavenLocal()
 
-		
-		// maven {
-		// 	url = version.endsWith("SNAPSHOT") ? "https://maven.lemonlime.tech/snapshots" : "https://maven.lemonlime.tech/releases"
-		// 	credentials(PasswordCredentials) {
-		// 		username = 'jack'
-		// 		password = System.getenv("JACKS_MAVEN_TOKEN")
-		// 	}
-		// 	authentication {
-		// 		basic(BasicAuthentication)
-		// 	}
-		// }
 	}
 }
