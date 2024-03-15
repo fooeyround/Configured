@@ -3,7 +3,7 @@
 	"id": "configurable",
 	"version": "${version}",
 	"name": "Configurable",
-	"description": "Take control over many of minecraft's features.",
+	"description": "Take control over minecraft's features.",
 	"authors": [
 		"Jack"
 	],
@@ -23,7 +23,7 @@
 		"configured.mixins.json"
 	],
 	"depends": {
-		"fabricloader": ">=0.14.14",
+		"fabricloader": ">=0.15.0",
 		"minecraft": "${minecraft_dependency}",
 		"java": ">=17",
 		"betterconfig": "*"

@@ -1,6 +1,7 @@
 package tech.lemonlime.configured;
 
 import dev.xpple.betterconfig.api.Config;
+import tech.lemonlime.config.Option;
 
 public class Settings {
 
@@ -37,6 +38,7 @@ public class Settings {
 
 
     @Config
+    @Option(desc = "Test") // Test the Option Type
     public static boolean disablePVP = false;
 
 

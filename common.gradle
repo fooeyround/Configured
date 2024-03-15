@@ -36,9 +36,9 @@ dependencies {
 
 
 	modImplementation(include("dev.xpple:betterconfig:${project.betterconfig_version}"))
-
-	implementation("com.github.LlamaLad7:MixinExtras:${project.mixinextras_version}")
-	annotationProcessor("com.github.LlamaLad7:MixinExtras:${project.mixinextras_version}")
+	//In Fabric loader now.
+//	implementation("com.github.LlamaLad7:MixinExtras:${project.mixinextras_version}")
+//	annotationProcessor("com.github.LlamaLad7:MixinExtras:${project.mixinextras_version}")
 
 	// dependencies
 //	include(modImplementation(fabricApi.module("fabric-resource-loader-v0", project.fabric_api_version)))
