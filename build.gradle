@@ -17,11 +17,9 @@ preprocess {
 	def mc118      = createNode('1.18.2'  , 1_18_02, 'yarn')
 	def mc119      = createNode('1.19.4'  , 1_19_04, 'yarn')
 	def mc120_1    = createNode('1.20.1'  , 1_20_01, 'yarn')
-	def mc120_4    = createNode('1.20.4'  , 1_20_04, 'yarn')
 	def mc121      = createNode('1.21'  , 1_21_00, 'yarn')
 
-	mc121.link(mc120_4, null)
-	mc120_4.link(mc120_1, null)
+	mc121.link(mc120_1, null)
 	mc120_1.link(mc119, null)
 	mc119.link(mc118, null)
 	mc118.link(mc117, null)
