@@ -25,6 +25,7 @@ pluginManagement {
 	}
 }
 
+
 def settings = new JsonSlurper().parseText(file('settings.json').text)
 for (String version : settings.versions) {
 	include(":$version")
