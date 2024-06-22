@@ -1,8 +1,8 @@
 {
 	"schemaVersion": 1,
-	"id": "configurable",
+	"id": "configured",
 	"version": "${version}",
-	"name": "Configurable",
+	"name": "Configured",
 	"description": "Take control over minecraft's features.",
 	"authors": [
 		"Jack"
