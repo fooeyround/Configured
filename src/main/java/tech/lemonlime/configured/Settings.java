@@ -28,7 +28,7 @@ public class Settings {
     public static boolean disableEyeOfEnderCasting = false;
 
 
-    @Config
+    @Config(comment="This feature is currently unavailable on 1.21, a fix will be made soon.")
     public static boolean disableEndGateways = false;
 
 

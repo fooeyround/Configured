@@ -15,6 +15,6 @@
     "fix.stringDupeFix.TripwireBlockMixin"
   ],
   "injectors": {
-    "defaultRequire": 1
+    "defaultRequire": 0
 	}
 }
