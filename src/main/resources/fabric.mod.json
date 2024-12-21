@@ -1,32 +1,31 @@
 {
 	"schemaVersion": 1,
-	"id": "configurable",
+	"id": "configured",
 	"version": "${version}",
-	"name": "Configurable",
+	"name": "Configured",
 	"description": "Take control over minecraft's features.",
 	"authors": [
-		"Jack"
+		"fooeyround"
 	],
 	"contact": {
 		"homepage": "https://maven.lemonlime.tech/",
 		"sources": "https://github.com/JackTheDevel0per/ToggleEnd"
 	},
 	"license": "MIT",
-	"icon": "assets/toggle-end/icon.png",
+	"icon": "assets/configured/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-          "tech.lemonlime.configured.Configured"
+          "configured.Configured"
 		]
 	},
 	"mixins": [
 		"configured.mixins.json"
 	],
 	"depends": {
-		"fabricloader": ">=0.15.0",
+		"fabricloader": ">=${fabric_loader_dependency}",
 		"minecraft": "${minecraft_dependency}",
-		"java": ">=17",
-		"betterconfig": "*"
+		"java": ">=17"
 	},
 	"suggests": {
 	}

@@ -4,9 +4,6 @@ apply plugin: 'com.replaymod.preprocess'
 
 int mcVersion = project.mcVersion
 
-preprocess {
-	tabIndentation = true
-}
 
 repositories {
 	maven {
@@ -35,7 +32,7 @@ dependencies {
 
 
 
-	modImplementation(include("dev.xpple:betterconfig:${project.betterconfig_version}"))
+	modImplementation(include("dev.xpple:betterconfig-fabric:${project.betterconfig_version}"))
 	//In Fabric loader now.
 //	implementation("com.github.LlamaLad7:MixinExtras:${project.mixinextras_version}")
 //	annotationProcessor("com.github.LlamaLad7:MixinExtras:${project.mixinextras_version}")
@@ -53,13 +50,10 @@ loom {
 	}
 }
 
-remapJar {
-	remapperIsolation = true
-}
 
 
-sourceCompatibility = JavaVersion.VERSION_17
-targetCompatibility = JavaVersion.VERSION_17
+sourceCompatibility = JavaVersion.VERSION_21
+targetCompatibility = JavaVersion.VERSION_21
 
 
 
@@ -87,6 +81,7 @@ processResources {
 		def valueMap = [
 				"version": fullModVersion,
 				"minecraft_dependency": project.minecraft_dependency,
+				"fabric_loader_dependency": project.loader_version,
 		]
 		expand valueMap
 	}
