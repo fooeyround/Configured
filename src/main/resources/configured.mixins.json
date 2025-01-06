@@ -11,6 +11,7 @@
     "feature.disablePlayerConnections.PlayerManagerMixin",
     "feature.disablePVP.MinecraftServerMixin",
     "feature.fakeHardcore.PlayerManagerMixin",
+    "feature.itemDespawnTimer.ItemEntityMixin",
     "feature.motd.ServerMetadataMixin",
     "fix.stringDupeFix.TripwireBlockMixin"
   ],
