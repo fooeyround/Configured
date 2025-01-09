@@ -6,6 +6,7 @@ import net.fabricmc.api.ModInitializer;
 
 //#if MC >= 11900
 
+import net.minecraft.server.MinecraftServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,13 +24,18 @@ public class Configured implements ModInitializer {
 	public static final Logger LOGGER = getLogger("configurable");
 
 
+	public static MinecraftServer MC_SERVER = null;
+
+
 	@Override
 	public void onInitialize() {
 		// This code runs as soon as Minecraft is in a mod-load-ready state.
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
 
-		new ModConfigBuilder("configured", Settings.class).build();
+		new ModConfigBuilder<>("configured", Settings.class)
+//				.registerTypeHierarchy(UUID.class, new UUIDAdapter(), UuidArgumentType::new)
+				.build();
 //
 //
 //		new ModConfigBuilder("configured-fixes", Fixes.class).build();

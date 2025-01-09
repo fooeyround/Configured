@@ -4,7 +4,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.EnderEyeItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Hand;
-//#if MC >= 12104
+//#if MC >= 12100
 import net.minecraft.util.ActionResult;
 //#else
 //$$ import net.minecraft.util.TypedActionResult;
@@ -21,7 +21,7 @@ import configured.Settings;
 public class EnderEyeItemMixin {
 
 
-    //#if MC >= 12104
+    //#if MC >= 12100
 
     @Inject(method = "use", at= @At(value = "HEAD"), cancellable = true)
     private void configured$conditionalEnderEyeCasting(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<ActionResult> cir) {

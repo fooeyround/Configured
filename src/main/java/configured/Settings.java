@@ -3,6 +3,8 @@ package configured;
 
 import dev.xpple.betterconfig.api.Config;
 
+import java.util.ArrayList;
+
 public class Settings {
 
 
@@ -14,11 +16,29 @@ public class Settings {
     public static boolean fakeHardcore = false;
 
 
-    @Config(comment = "This disables the ability to join the server. It does not kick players!")
-    public static boolean disablePlayerConnections = false;
+    @Config(comment = "This disables the ability to join the server. It does not kick players!\nAllowing non blocked uses the ")
+    public static SettingTypes.PlayerConnectionSetting playerConnections = SettingTypes.PlayerConnectionSetting.ALLOW_ALL;
 
 
-    @Config
+    @Config(adder = @Config.Adder(value = "playerListAdder"), remover = @Config.Remover(value = "playerListRemover"))
+    public static ArrayList<String> playerConnectionBlockList = new ArrayList<>();
+    public static void playerListAdder(String string) {
+        if (Configured.MC_SERVER != null && Configured.MC_SERVER.getUserCache() != null){
+            Configured.MC_SERVER.getUserCache().findByName(string).ifPresent(profile -> {
+                String id = profile.getId().toString();
+                if (!playerConnectionBlockList.contains(id)) {
+                    playerConnectionBlockList.add(id);
+                }
+            });
+        }
+    }
+    public static void playerListRemover(String string) {
+        if (Configured.MC_SERVER != null && Configured.MC_SERVER.getUserCache() != null){
+            Configured.MC_SERVER.getUserCache().findByName(string).ifPresent(profile -> playerConnectionBlockList.remove(profile.getId().toString()));
+        }
+    }
+
+
     public static String  disablePlayerConnectionsJoinMessage = "";
 
 

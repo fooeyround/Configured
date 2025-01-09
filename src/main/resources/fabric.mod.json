@@ -8,8 +8,8 @@
 		"fooeyround"
 	],
 	"contact": {
-		"homepage": "https://maven.lemonlime.tech/",
-		"sources": "https://github.com/JackTheDevel0per/ToggleEnd"
+		"homepage": "https://github.com/fooeyround/Configured",
+		"sources": "https://github.com/fooeyround/Configured"
 	},
 	"license": "MIT",
 	"icon": "assets/configured/icon.png",

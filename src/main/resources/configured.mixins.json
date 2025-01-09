@@ -3,6 +3,7 @@
   "package": "configured.mixin",
   "compatibilityLevel": "JAVA_18",
   "mixins": [
+    "MinecraftServerMixin",
     "feature.disableEnd.EndPortalBlockMixin",
     "feature.disableEndGateways.EndGatewayBlockEntityMixin",
     "feature.disableEndPortalFrameFilling.EnderEyeItemMixin",
