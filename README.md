@@ -5,13 +5,13 @@ A mod with several small tweaks that aim at giving the server admin more finite 
 You can disable travel to the end, nether, have fake hardcore hearts, toggle the "Join-ability" of your server for everyone but ops so that you can stay in a sort of maintenance mode without needing to change permissions.
 
 Syntax: 
-the `/cconfig configured` command is used to control the settings in game, the configuration is stored in `./config/configured/config.json` relative to the server's directory.
+the `/config configured` command is used to control the settings in game, the configuration is stored in `./config/configured/config.json` relative to the server's directory.
 
 ### Examples:
-  - `/cconfig configured fakeHardcore set true`
-  - `/cconfig configured itemDespawnAge reset`
-  - `/cconfig configured playerConnections set ALLOW_ALL`
-  - `/cconfig configured disablePVP get`
+  - `/config configured fakeHardcore set true`
+  - `/config configured itemDespawnAge reset`
+  - `/config configured playerConnections set ALLOW_ALL`
+  - `/config configured disablePVP get`
 
 
 ## Settings:
