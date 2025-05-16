@@ -8,7 +8,7 @@ on:
     inputs:
       target_subproject:
         description: |-
-          The subproject name(s) of the specified Minecraft version to be released, seperated with ",".
+          The subproject name(s) of the specified Minecraft version to be released, separated with ",".
           By default all subprojects will be released
         type: string
         required: false

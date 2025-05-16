@@ -40,7 +40,7 @@ jobs:
         run: |
           chmod +x gradlew
           if [ -z "${{ inputs.target_subproject }}" ]; then
-              echo "Building all subprojects"
+              echo "Building"
               ./gradlew build
           else
               args=$(echo "${{ inputs.target_subproject }}" | tr ',' '\n' | sed 's/$/:build/' | paste -sd ' ')
