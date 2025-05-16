@@ -10,14 +10,12 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 
 /**
  * idea taken from carpet fixes, when I get the time I will update this fix, and also pr the update to carpet fixes.
- *
+ *--
  * Fixes the wring dupe at the cost of removing the ability to disarm tripwire. Wait you didn't know you could do that?
  * That's why I decided to do it xD
  *  - FX
- *
- *
+ *--
  * I wish I had time to make a real fix D:
- *  - Jack
  */
 
 @Mixin(TripwireBlock.class)

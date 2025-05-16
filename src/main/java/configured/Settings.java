@@ -3,6 +3,7 @@ package configured;
 
 import dev.xpple.betterconfig.api.Config;
 
+
 import java.util.ArrayList;
 
 public class Settings {
@@ -26,6 +27,7 @@ public class Settings {
         if (Configured.MC_SERVER != null && Configured.MC_SERVER.getUserCache() != null){
             Configured.MC_SERVER.getUserCache().findByName(string).ifPresent(profile -> {
                 String id = profile.getId().toString();
+
                 if (!playerConnectionBlockList.contains(id)) {
                     playerConnectionBlockList.add(id);
                 }
@@ -54,7 +56,7 @@ public class Settings {
     public static boolean disableEyeOfEnderCasting = false;
 
 
-    @Config(comment="This feature is currently unavailable on 1.21, a fix will be made soon.")
+    @Config
     public static boolean disableEndGateways = false;
 
 

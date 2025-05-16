@@ -13,7 +13,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(EnderEyeItem.class)
 public class EnderEyeItemMixin {
 
-
     @Inject(method="useOnBlock",at=@At("HEAD"), cancellable = true)
     private void configured$conditionalEndPortalFrameFilling(ItemUsageContext context, CallbackInfoReturnable<ActionResult> cir) {
         if (Settings.disableEndPortalFrameFilling) {

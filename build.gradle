@@ -1,50 +1,122 @@
 plugins {
+	id 'fabric-loom' version '1.10-SNAPSHOT'
 	id 'maven-publish'
-	id 'fabric-loom' version '1.9-SNAPSHOT' apply false
-
-
-	// https://github.com/ReplayMod/preprocessor
-	// https://github.com/Fallen-Breath/preprocessor
-	id 'com.replaymod.preprocess' version '9d21b334a7'
-
-
 }
 
-preprocess {
-
-	def mc119      = createNode('1.19.4'  , 1_19_04, 'yarn')
-	def mc120_4    = createNode('1.20.4'  , 1_20_04, 'yarn')
-	def mc121_1    = createNode('1.21.1'  , 1_21_01, 'yarn')
-	def mc121_4    = createNode('1.21.4'  , 1_21_04, 'yarn')
-
-	mc121_4.link(mc121_1, null)
-	mc121_1.link(mc120_4, null)
-	mc120_4.link(mc119, null)
+version = project.mod_version
+group = project.maven_group
 
 
+String versionSuffix = ''
+
+if (System.getenv("BUILD_RELEASE") != "true") {
+	String buildNumber = System.getenv("BUILD_ID")
+	versionSuffix += buildNumber != null ? ('+build.' + buildNumber) : '-SNAPSHOT'
+}
+String fullModVersion = project.mod_version + versionSuffix
+
+
+base {
+	archivesName = project.archives_base_name + '-mc' + project.minecraft_version + "-v" + fullModVersion
 }
 
-tasks.register('buildAndGather') {
-	subprojects {
-		dependsOn project.tasks.named('build').get()
+repositories {
+	maven {
+		url 'https://jitpack.io'
 	}
-	doFirst {
-		println 'Gathering builds'
-		def buildLibs = {
-			p -> p.buildDir.toPath().resolve('libs')
+	maven {
+		url 'https://www.cursemaven.com'
+	}
+
+	maven {
+		url 'https://maven.xpple.dev/maven2'
+	}
+}
+
+loom {
+	splitEnvironmentSourceSets()
+
+	runConfigs.all {
+		// to make sure it generates all "Minecraft Client (:subproject_name)" applications
+		ideConfigGenerated = true
+		runDir '../../run'
+		vmArgs '-Dmixin.debug.export=true'
+	}
+
+	mods {
+		"configured" {
+			sourceSet sourceSets.main
+			sourceSet sourceSets.client
 		}
-		delete fileTree(buildLibs(rootProject)) {
-			include '*'
+	}
+
+}
+
+
+
+
+
+dependencies {
+	// To change the versions see the gradle.properties file
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+
+	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+	modImplementation(include("dev.xpple:betterconfig-fabric:${project.betterconfig_version}"))
+
+}
+
+processResources {
+	inputs.property "version", fullModVersion
+	inputs.property "minecraft_dependency", project.minecraft_version
+
+	filesMatching("fabric.mod.json") {
+		def valueMap = [
+				"version": fullModVersion,
+				"minecraft_dependency": project.minecraft_version,
+				"fabric_loader_dependency": project.loader_version,
+		]
+		expand valueMap
+	}
+}
+
+tasks.withType(JavaCompile).configureEach {
+	it.options.release = 21
+}
+
+java {
+	// Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
+	// if it is present.
+	// If you remove this line, sources will not be generated.
+	withSourcesJar()
+
+	sourceCompatibility = JavaVersion.VERSION_21
+	targetCompatibility = JavaVersion.VERSION_21
+}
+
+jar {
+	inputs.property "archivesName", project.base.archivesName
+
+	from("LICENSE") {
+		rename { "${it}_${inputs.properties.archivesName}"}
+	}
+}
+
+// configure the maven publication
+publishing {
+	publications {
+		create("mavenJava", MavenPublication) {
+			artifactId = project.archives_base_name
+			from components.java
 		}
-		subprojects {
-			copy {
-				from(buildLibs(project)) {
-					include '*.jar'
-					exclude '*-dev.jar', '*-sources.jar'
-				}
-				into buildLibs(rootProject)
-				duplicatesStrategy DuplicatesStrategy.INCLUDE
-			}
-		}
+	}
+
+	// See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
+	repositories {
+		// Add repositories to publish to here.
+		// Notice: This block does NOT have the same function as the block in the top level.
+		// The repositories here will be used for publishing your artifact, not for
+		// retrieving dependencies.
 	}
 }

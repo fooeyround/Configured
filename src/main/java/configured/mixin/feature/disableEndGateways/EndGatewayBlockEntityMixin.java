@@ -12,13 +12,7 @@ import configured.Settings;
 public class EndGatewayBlockEntityMixin {
 
 
-    //#if MC > 12100
     @ModifyReturnValue(method = "needsCooldownBeforeTeleporting", at = @At(value = "RETURN"))
-    //#elseif MC > 11700
-    //$$ @ModifyExpressionValue(method = "serverTick", at = @At(value = "INVOKE", target = "Ljava/util/List;isEmpty()Z"))
-    //#else
-    //$$ @ModifyExpressionValue(method = "tick", at = @At(value = "INVOKE", target = "Ljava/util/List;isEmpty()Z"))
-    //#endif
     private boolean configured$conditionalGatewayTeleport(boolean original) {
         return original || Settings.disableEndGateways;
     }
