@@ -30,8 +30,8 @@ jobs:
              ~/.gradle/caches
              ~/.gradle/wrapper
              ./.gradle/loom-cache
-             key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle', '**/gradle.properties', '**/*.accesswidener') }}
-             restore-keys: |
+            key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle', '**/gradle.properties', '**/*.accesswidener') }}
+            restore-keys: |
              ${{ runner.os }}-gradle-
 
       - name: Make gradlew executable
