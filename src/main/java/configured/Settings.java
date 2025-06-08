@@ -2,9 +2,14 @@ package configured;
 
 
 import dev.xpple.betterconfig.api.Config;
+import net.minecraft.component.Component;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.text.MutableText;
+import net.minecraft.text.Text;
 
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class Settings {
 
@@ -24,13 +29,14 @@ public class Settings {
     @Config(adder = @Config.Adder(value = "playerListAdder"), remover = @Config.Remover(value = "playerListRemover"))
     public static ArrayList<String> playerConnectionBlockList = new ArrayList<>();
     public static void playerListAdder(String string) {
-        if (Configured.MC_SERVER != null && Configured.MC_SERVER.getUserCache() != null){
+        if (Configured.MC_SERVER != null && Configured.MC_SERVER.getUserCache() != null) {
             Configured.MC_SERVER.getUserCache().findByName(string).ifPresent(profile -> {
                 String id = profile.getId().toString();
 
                 if (!playerConnectionBlockList.contains(id)) {
                     playerConnectionBlockList.add(id);
                 }
+
             });
         }
     }
@@ -38,6 +44,31 @@ public class Settings {
         if (Configured.MC_SERVER != null && Configured.MC_SERVER.getUserCache() != null){
             Configured.MC_SERVER.getUserCache().findByName(string).ifPresent(profile -> playerConnectionBlockList.remove(profile.getId().toString()));
         }
+    }
+    private static Text playerListCustomChatRepresentation() {
+        if (Configured.MC_SERVER == null || Configured.MC_SERVER.getUserCache() == null) throw new IllegalStateException("Minecraft Server reference and user cache should not be null in the context of running a configured command");
+        MutableText text = Text.literal("[");
+        for (int i = 0; i < playerConnectionBlockList.size(); i++) {
+                final int j = i;
+                Configured.MC_SERVER.getUserCache().getByUuid(UUID.fromString(playerConnectionBlockList.get(i))).ifPresent(profile -> {
+                    String name = profile.getName();
+                    text.append(name);
+                    if (j != playerConnectionBlockList.size()-1) text.append(", ");
+                });
+
+
+        }
+        text.append("]");
+        return text;
+        //        return Text.literal(Text(playerConnectionBlockList.stream()
+//                .map(uuid -> {
+//                    PlayerEntity player = MinecraftServer.getInstance().level.getPlayerByUUID(uuid);
+//                    if (player == null) {
+//                        return Component.literal(uuid.toString());
+//                    }
+//                    return player.getDisplayName();
+//                })
+//                .toList(), Component.literal(", ")));
     }
 
 
