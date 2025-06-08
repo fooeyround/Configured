@@ -39,7 +39,6 @@ loom {
 	runConfigs.configureEach {
 		// to make sure it generates all "Minecraft Client (:subproject_name)" applications
 		ideConfigGenerated = true
-		runDir '../../run'
 		vmArgs '-Dmixin.debug.export=true'
 	}
 
