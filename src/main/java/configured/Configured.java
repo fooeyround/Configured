@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 
 
 public class Configured implements ModInitializer {
-	public static final Logger LOGGER = LoggerFactory.getLogger("configurable");
+	public static final Logger LOGGER = LoggerFactory.getLogger("configured");
 	public static MinecraftServer MC_SERVER = null;
 
 
