@@ -1,0 +1,64 @@
+name: Release
+
+on:
+  workflow_dispatch:
+  release:
+    types: [published]
+
+jobs:
+  get-branches:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - name: Install gh + jq
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gh jq
+      - name: Fetch branches
+        id: set-matrix
+        run: |
+          branches=$(gh api repos/${{ github.repository }}/branches | jq -r '.[].name' | jq -R -s -c 'split("\n") | map(select(length > 0))')
+          echo "matrix=$branches"
+          echo "::set-output name=matrix::$branches"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
+  build:
+    needs: get-branches
+    strategy:
+      matrix:
+        branch: ${{ fromJson(needs.get-branches.outputs.matrix) }}
+    uses: ./.github/workflows/build.yml
+    with:
+      release: true
+    name: Build ${{ matrix.branch }}
+    concurrency:
+      group: build-${{ matrix.branch }}
+      cancel-in-progress: false
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ matrix.branch }}
+
+      - name: Call build
+        uses: ./.github/workflows/build.yml
+        with:
+          release: true
+
+      - name: Upload hash
+        run: |
+          cd versions
+          for d in */ ; do
+            cd "$d/build/libs" || continue
+            for f in *; do
+              sha256sum "$f" > "$f.sha256"
+              gh release upload "${{ github.event.release.tag_name }}" "$f" "$f.sha256" --clobber
+            done
+            cd - >/dev/null
+          done
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
