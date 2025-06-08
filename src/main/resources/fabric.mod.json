@@ -15,7 +15,7 @@
 	"icon": "assets/configured/icon.png",
 	"environment": "*",
 	"entrypoints": {
-		"main": [
+		"server": [
           "configured.Configured"
 		]
 	},

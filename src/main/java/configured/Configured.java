@@ -1,28 +1,26 @@
 package configured;
 
 import dev.xpple.betterconfig.api.ModConfigBuilder;
-import net.fabricmc.api.ModInitializer;
+import net.fabricmc.api.DedicatedServerModInitializer;
 
 
+import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.command.ServerCommandSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
 
 
-public class Configured implements ModInitializer {
+public class Configured implements DedicatedServerModInitializer {
 	public static final Logger LOGGER = LoggerFactory.getLogger("configured");
 	public static MinecraftServer MC_SERVER = null;
 
 
 	@Override
-	public void onInitialize() {
-		new ModConfigBuilder<>("configured", Settings.class)
-//				.registerTypeHierarchy(UUID.class, new UUIDAdapter(), UuidArgumentType::new)
-				.build();
-//		new ModConfigBuilder("configured-fixes", Fixes.class).build();
-
+	public void onInitializeServer() {
+		new ModConfigBuilder<ServerCommandSource, CommandRegistryAccess>("configured", Settings.class).build();
 		LOGGER.info("Minecraft is now more configurable...");
 	}
 

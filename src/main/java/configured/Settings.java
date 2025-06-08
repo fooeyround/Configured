@@ -26,7 +26,7 @@ public class Settings {
     public static SettingTypes.PlayerConnectionSetting playerConnections = SettingTypes.PlayerConnectionSetting.ALLOW_ALL;
 
 
-    @Config(adder = @Config.Adder(value = "playerListAdder"), remover = @Config.Remover(value = "playerListRemover"))
+    @Config(adder = @Config.Adder(value = "playerListAdder"), remover = @Config.Remover(value = "playerListRemover"), chatRepresentation = "playerListCustomChatRepresentation")
     public static ArrayList<String> playerConnectionBlockList = new ArrayList<>();
     public static void playerListAdder(String string) {
         if (Configured.MC_SERVER != null && Configured.MC_SERVER.getUserCache() != null) {
@@ -60,15 +60,6 @@ public class Settings {
         }
         text.append("]");
         return text;
-        //        return Text.literal(Text(playerConnectionBlockList.stream()
-//                .map(uuid -> {
-//                    PlayerEntity player = MinecraftServer.getInstance().level.getPlayerByUUID(uuid);
-//                    if (player == null) {
-//                        return Component.literal(uuid.toString());
-//                    }
-//                    return player.getDisplayName();
-//                })
-//                .toList(), Component.literal(", ")));
     }
 
 

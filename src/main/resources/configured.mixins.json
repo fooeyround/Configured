@@ -13,8 +13,7 @@
     "feature.disablePVP.MinecraftServerMixin",
     "feature.fakeHardcore.PlayerManagerMixin",
     "feature.itemDespawnTimer.ItemEntityMixin",
-    "feature.motd.ServerMetadataMixin",
-    "fix.stringDupeFix.TripwireBlockMixin"
+    "feature.motd.ServerMetadataMixin"
   ],
   "injectors": {
     "defaultRequire": 1
