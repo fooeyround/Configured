@@ -12,6 +12,8 @@ jobs:
     secrets: inherit
 
   upload-to-release:
+    permissions:
+      contents: write
     needs: build
     runs-on: ubuntu-latest
 
