@@ -1,32 +1,36 @@
 name: Release
 
 on:
-  workflow_dispatch:
   release:
     types: [published]
 
 jobs:
   build:
+    uses: ./.github/workflows/build.yml
+    with:
+      release: true
+    secrets: inherit
+
+  upload-to-release:
+    needs: build
     runs-on: ubuntu-latest
-    name: Build Release
-    permissions:
-      contents: write
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Call build
-        uses: ./.github/workflows/build.yml
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
         with:
-          release: true
+          name: build-output
+          path: output/
 
-      - name: Upload hash
+      - name: Install GitHub CLI
+        run: sudo apt-get install -y gh
+
+      - name: Upload to GitHub Release
         run: |
-            cd "build/libs" || continue
-            for f in *; do
-              sha256sum "$f" > "$f.sha256"
-              gh release upload "${{ github.event.release.tag_name }}" "$f" "$f.sha256" --clobber
-            done
-            cd - >/dev/null
+          cd output
+          for file in *; do
+            sha256sum "$file" > "$file.sha256"
+            gh release upload "${{ github.event.release.tag_name }}" "$file" "$file.sha256" --clobber
+          done
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
