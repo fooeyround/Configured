@@ -34,8 +34,7 @@ jobs:
         run: |
           cd output
           for file in *; do
-            sha256sum "$file" > "$file.sha256"
-            gh release upload "${{ github.event.release.tag_name }}" "$file" "$file.sha256" --clobber
+            gh release upload "${{ github.event.release.tag_name }}" "$file" --clobber
           done
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
