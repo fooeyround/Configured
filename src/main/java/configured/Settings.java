@@ -14,15 +14,15 @@ import java.util.UUID;
 public class Settings {
 
 
-    @Config(comment = "to default back to what was defined in server.properties, set it to _, to make it empty use __")
+    @Config
     public static String motd = "_";
 
 
-    @Config(comment = "This makes the client think it is hardcore. respawn still works.")
+    @Config
     public static boolean fakeHardcore = false;
 
 
-    @Config(comment = "This disables the ability to join the server. It does not kick players!\nAllowing non blocked uses the ")
+    @Config
     public static SettingTypes.PlayerConnectionSetting playerConnections = SettingTypes.PlayerConnectionSetting.ALLOW_ALL;
 
 
@@ -86,11 +86,11 @@ public class Settings {
     public static boolean disableNether = false;
 
 
-    @Config(comment = "Disable Player v. Player combat")
+    @Config
     public static boolean disablePVP = false;
 
 
-    @Config(comment = "Configure how long it takes for items to despawn (in ticks).\nThe default is 5 minutes (6000 ticks)")
+    @Config
     public static int itemDespawnAge = 6000;
 
 
