@@ -3,10 +3,8 @@ plugins {
 	id 'maven-publish'
 }
 
-
 version = ""
 group = project.maven_group
-
 
 String versionSuffix = ''
 
@@ -15,7 +13,6 @@ if (System.getenv("BUILD_RELEASE") != "true") {
 	versionSuffix += buildNumber != null ? ('+build.' + buildNumber) : '-SNAPSHOT'
 }
 String fullModVersion = project.mod_version + versionSuffix
-
 
 base {
 	archivesName = project.archives_base_name + '-mc' + project.minecraft_version + "-v" + fullModVersion
@@ -38,7 +35,6 @@ loom {
 	splitEnvironmentSourceSets()
 
 	runConfigs.configureEach {
-		// to make sure it generates all "Minecraft Client (:subproject_name)" applications
 		ideConfigGenerated = true
 		vmArgs '-Dmixin.debug.export=true'
 	}
@@ -100,23 +96,5 @@ jar {
 
 	from("LICENSE") {
 		rename { "${it}_${inputs.properties.archivesName}"}
-	}
-}
-
-// configure the maven publication
-publishing {
-	publications {
-		create("mavenJava", MavenPublication) {
-			artifactId = project.archives_base_name
-			from components.java
-		}
-	}
-
-	// See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
-	repositories {
-		// Add repositories to publish to here.
-		// Notice: This block does NOT have the same function as the block in the top level.
-		// The repositories here will be used for publishing your artifact, not for
-		// retrieving dependencies.
 	}
 }

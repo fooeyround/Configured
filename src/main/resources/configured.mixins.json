@@ -8,12 +8,19 @@
     "feature.disableEndGateways.EndGatewayBlockEntityMixin",
     "feature.disableEndPortalFrameFilling.EnderEyeItemMixin",
     "feature.disableEyeOfEnderCasting.EnderEyeItemMixin",
+    "feature.disableMonsterSpawning.MinecraftServerMixin",
     "feature.disableNether.NetherPortalBlockMixin",
     "feature.disablePlayerConnections.PlayerManagerMixin",
     "feature.disablePVP.MinecraftServerMixin",
+    "feature.enableCommandBlock.MinecraftDedicatedServerMixin",
     "feature.fakeHardcore.PlayerManagerMixin",
     "feature.itemDespawnTimer.ItemEntityMixin",
-    "feature.motd.ServerMetadataMixin"
+    "feature.maxPlayers.PlayerManagerMixin",
+    "feature.maxPlayersFakeListing.PlayerManagerMixin",
+    "feature.motd.ServerMetadataMixin",
+    "feature.simulationDistance.DedicatedPlayerManagerMixin",
+    "feature.spawnProtection.MinecraftDedicatedServerMixin",
+    "feature.viewDistance.DedicatedPlayerManagerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

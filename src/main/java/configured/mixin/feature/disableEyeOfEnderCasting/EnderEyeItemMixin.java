@@ -16,8 +16,8 @@ import configured.Settings;
 @Mixin(EnderEyeItem.class)
 public class EnderEyeItemMixin {
 
-    @Inject(method = "use", at= @At(value = "HEAD"), cancellable = true)
+    @Inject(method = "use", at = @At(value = "HEAD"), cancellable = true)
     private void configured$conditionalEnderEyeCasting(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<ActionResult> cir) {
-         if (Settings.disableEyeOfEnderCasting) cir.setReturnValue(ActionResult.PASS);
+        if (Settings.disableEyeOfEnderCasting) cir.setReturnValue(ActionResult.PASS);
     }
 }
