@@ -16,6 +16,8 @@ the `/config configured` command is used to control the settings in game, the co
 
 ## Settings:
 
+*All default values should show vanilla behavior. If that is not the case, please submit a bug report.*
+
 **motd** - Set the motd of the server on the fly.
 
 **fakeHardcore** - Make all player's hearts show up as hardcore (does not affect gameplay).
