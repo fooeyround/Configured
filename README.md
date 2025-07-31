@@ -20,7 +20,7 @@ the `/config configured` command is used to control the settings in game, the co
 
 **fakeHardcore** - Make all player's hearts show up as hardcore (does not affect gameplay).
 
-**playerConnections** - control who can join the server, `ALLOW_ALL` is vanilla / default, `ALLOW_OPS` allows ops, no one else, `ALLOW_ONLY_NON_BLOCKED` uses the `playerConnectionBlockList` to determine who to block.
+**playerConnections** - Control who can join the server, `ALLOW_ALL` is vanilla / default, `ALLOW_OPS` allows ops, no one else, `ALLOW_ONLY_NON_BLOCKED` uses the `playerConnectionBlockList` to determine who to block.
 
 **disablePlayerConnectionsJoinMessage** - This is the message shown to the players who are barred from joining.
 
@@ -34,8 +34,21 @@ the `/config configured` command is used to control the settings in game, the co
 
 **disableNether** - Toggle the functionality of nether portals for all players.
 
-**disablePVP** - An online alternative to the pvp setting in server.properties, set that to true to make this rule effective. 
+**disablePVP** - An online alternative to the pvp setting in server.properties, set that to true to make this rule effective.
 
-**itemDespawnAge** - By default minecraft sets this to 5 minutes, or 6000 ticks. Set the item despawn age *in ticks*.
+**itemDespawnAge** - By default minecraft sets this to 5 minutes, or 6000 ticks. Set the item despawn age *in ticks*
 
+**simulationDistance** - Set the server's simulation distance on the fly.
+
+**viewDistance** - Set the server's view distance on the fly.
+
+**maxPlayers** - Set the max player count on the fly.
+
+**maxPlayersFakeListing** - Set the max player count in the server listing and /list command; does not affect real max player count.
+
+**spawnProtection** - Set the server's overworld spawn protection on the fly.
+
+**forceEnableCommandBlock** - enable command blocks no matter the setting in server.properties.
+
+**disableMonsterSpawning** - enable peaceful like hostile mob spawning. (spawning is always disabled if in peaceful or set as such in server.properties).
 
