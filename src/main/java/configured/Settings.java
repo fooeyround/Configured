@@ -103,7 +103,7 @@ public class Settings {
     public static void updateDisableMonsterSpawning(boolean value) {
         disableMonsterSpawning = value;
         for (ServerWorld serverWorld : Configured.MC_SERVER.getWorlds()) {
-            serverWorld.setMobSpawnOptions(!value);
+            serverWorld.setMobSpawnOptions(Configured.MC_SERVER.isMonsterSpawningEnabled());
         }
     }
 
