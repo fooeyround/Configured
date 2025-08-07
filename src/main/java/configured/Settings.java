@@ -112,7 +112,7 @@ public class Settings {
     private static Text dedicatedServerOnly() {
         return Text.literal("This feature may only work correctly on a dedicated server.").formatted(Formatting.GOLD);
     }
-    private boolean isDedicated() {
+    private static boolean isDedicated() {
         return Configured.MC_SERVER instanceof MinecraftDedicatedServer;
     }
 
