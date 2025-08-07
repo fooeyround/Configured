@@ -31,7 +31,7 @@ public class Settings {
     @Config(comment = "dedicatedServerOnly", condition = "isDedicated") public static int maxPlayersFakeListing = -1;
     @Config(comment = "dedicatedServerOnly", condition = "isDedicated") public static int spawnProtection = -1;
     @Config(comment = "dedicatedServerOnly", condition = "isDedicated") public static boolean forceEnableCommandBlock = false;
-    @Config(setter = @Config.Setter("updateDisableMonsterSpawning")) public static boolean disableMonsterSpawning = true;
+    @Config(setter = @Config.Setter("updateDisableMonsterSpawning")) public static boolean disableMonsterSpawning = false;
 
     @Config(comment = "dedicatedServerOnly", condition = "isDedicated") public static SettingTypes.PlayerConnectionSetting playerConnections = SettingTypes.PlayerConnectionSetting.ALLOW_ALL;
 
