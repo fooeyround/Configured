@@ -34,10 +34,6 @@ the `/config configured` command is used to control the settings in game, the co
 
 **disableEndGateways** - Disables teleporting of any entity through End Gateways, disabling their full functionality.
 
-**disableNether** - Toggle the functionality of nether portals for all players.
-
-**disablePVP** - An online alternative to the pvp setting in server.properties, set that to true to make this rule effective.
-
 **itemDespawnAge** - By default minecraft sets this to 5 minutes, or 6000 ticks. Set the item despawn age *in ticks*
 
 **simulationDistance** - Set the server's simulation distance on the fly.
@@ -49,8 +45,4 @@ the `/config configured` command is used to control the settings in game, the co
 **maxPlayersFakeListing** - Set the max player count in the server listing and /list command; does not affect real max player count.
 
 **spawnProtection** - Set the server's overworld spawn protection on the fly.
-
-**forceEnableCommandBlock** - enable command blocks no matter the setting in server.properties.
-
-**disableMonsterSpawning** - enable peaceful like hostile mob spawning. (spawning is always disabled if in peaceful or set as such in server.properties).
 

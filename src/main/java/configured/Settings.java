@@ -22,8 +22,6 @@ public class Settings {
     @Config public static boolean disableEndPortalFrameFilling = false;
     @Config public static boolean disableEyeOfEnderCasting = false;
     @Config public static boolean disableEndGateways = false;
-    @Config public static boolean disableNether = false;
-    @Config public static boolean disablePVP = false;
     @Config public static int itemDespawnAge = 6000;
     @Config(comment = "dedicatedServerOnly", condition = "isDedicated", setter = @Config.Setter("setSimulationDistance")) public static int simulationDistance = 0;
     @Config(comment = "dedicatedServerOnly",  condition = "isDedicated", setter = @Config.Setter("setViewDistance"))  public static int viewDistance = 0;
