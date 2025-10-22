@@ -30,17 +30,15 @@ public class Settings {
     @Config(comment = "dedicatedServerOnly", condition = "isDedicated") public static int maxPlayers = -1;
     @Config(comment = "dedicatedServerOnly", condition = "isDedicated") public static int maxPlayersFakeListing = -1;
     @Config(comment = "dedicatedServerOnly", condition = "isDedicated") public static int spawnProtection = -1;
-    @Config(comment = "dedicatedServerOnly", condition = "isDedicated") public static boolean forceEnableCommandBlock = false;
-    @Config(setter = @Config.Setter("updateDisableMonsterSpawning")) public static boolean disableMonsterSpawning = false;
 
     @Config(comment = "dedicatedServerOnly", condition = "isDedicated") public static SettingTypes.PlayerConnectionSetting playerConnections = SettingTypes.PlayerConnectionSetting.ALLOW_ALL;
 
     @Config(comment = "dedicatedServerOnly", condition = "isDedicated", adder = @Config.Adder(value = "playerListAdder"), remover = @Config.Remover(value = "playerListRemover"), chatRepresentation = "playerListCustomChatRepresentation")
     public static ArrayList<String> playerConnectionBlockList = new ArrayList<>();
     public static void playerListAdder(String string) {
-        if (Configured.MC_SERVER != null && Configured.MC_SERVER.getUserCache() != null) {
-            Configured.MC_SERVER.getUserCache().findByName(string).ifPresent(profile -> {
-                String id = profile.getId().toString();
+        if (Configured.MC_SERVER != null && Configured.MC_SERVER.getApiServices().nameToIdCache() != null) {
+            Configured.MC_SERVER.getApiServices().nameToIdCache().findByName(string).ifPresent(playerConfigEntry -> {
+                String id = playerConfigEntry.id().toString();
 
                 if (!playerConnectionBlockList.contains(id)) {
                     playerConnectionBlockList.add(id);
@@ -50,17 +48,17 @@ public class Settings {
         }
     }
     public static void playerListRemover(String string) {
-        if (Configured.MC_SERVER != null && Configured.MC_SERVER.getUserCache() != null){
-            Configured.MC_SERVER.getUserCache().findByName(string).ifPresent(profile -> playerConnectionBlockList.remove(profile.getId().toString()));
+        if (Configured.MC_SERVER != null && Configured.MC_SERVER.getApiServices().nameToIdCache() != null){
+            Configured.MC_SERVER.getApiServices().nameToIdCache().findByName(string).ifPresent(playerConfigEntry -> playerConnectionBlockList.remove(playerConfigEntry.id().toString()));
         }
     }
     private static Text playerListCustomChatRepresentation() {
-        if (Configured.MC_SERVER == null || Configured.MC_SERVER.getUserCache() == null) throw new IllegalStateException("Minecraft Server reference and user cache should not be null in the context of running a configured command");
+        if (Configured.MC_SERVER == null || Configured.MC_SERVER.getApiServices().nameToIdCache() == null) throw new IllegalStateException("Minecraft Server reference and user cache should not be null in the context of running a configured command\nPlease report this as a bug!");
         MutableText text = Text.literal("[");
         for (int i = 0; i < playerConnectionBlockList.size(); i++) {
             final int j = i;
-            Configured.MC_SERVER.getUserCache().getByUuid(UUID.fromString(playerConnectionBlockList.get(i))).ifPresent(profile -> {
-                String name = profile.getName();
+            Configured.MC_SERVER.getApiServices().nameToIdCache().getByUuid(UUID.fromString(playerConnectionBlockList.get(i))).ifPresent(playerConfigEntry -> {
+                String name = playerConfigEntry.name();
                 text.append(name);
                 if (j != playerConnectionBlockList.size()-1) text.append(", ");
             });
@@ -77,7 +75,7 @@ public class Settings {
             Configured.MC_SERVER.getPlayerManager().setSimulationDistance(value);
         } else {
             if (Configured.MC_SERVER instanceof MinecraftDedicatedServer dedicatedServer) {
-                Configured.MC_SERVER.getPlayerManager().setSimulationDistance(dedicatedServer.getProperties().simulationDistance);
+                dedicatedServer.setSimulationDistance(dedicatedServer.getProperties().simulationDistance.get());
             } else {
                 Configured.LOGGER.error("Simulation Distance failed to reset in non-dedicated setting. Please use the video settings menu. If you are running a dedicated server, please report this as a bug.");
             }
@@ -93,19 +91,13 @@ public class Settings {
             Configured.MC_SERVER.getPlayerManager().setViewDistance(value);
         } else {
             if (Configured.MC_SERVER instanceof MinecraftDedicatedServer dedicatedServer) {
-                Configured.MC_SERVER.getPlayerManager().setViewDistance(dedicatedServer.getProperties().viewDistance);
+                Configured.MC_SERVER.getPlayerManager().setViewDistance(dedicatedServer.getProperties().viewDistance.get());
             } else {
                 Configured.LOGGER.error("View Distance failed to reset in non-dedicated setting. Please use the video settings menu. If you are running a dedicated server, please report this as a bug.");
             }
         }
     }
 
-    public static void updateDisableMonsterSpawning(boolean value) {
-        disableMonsterSpawning = value;
-        for (ServerWorld serverWorld : Configured.MC_SERVER.getWorlds()) {
-            serverWorld.setMobSpawnOptions(Configured.MC_SERVER.isMonsterSpawningEnabled());
-        }
-    }
 
 
 

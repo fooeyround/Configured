@@ -10,12 +10,8 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(PlayerManager.class)
 public class PlayerManagerMixin {
 
-    @ModifyExpressionValue(method = "checkCanJoin", at = @At(value = "FIELD", target = "Lnet/minecraft/server/PlayerManager;maxPlayers:I"))
+    @ModifyExpressionValue(method = "checkCanJoin", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/PlayerManager;getMaxPlayerCount()I"))
     private static int configured$maxPlayers$joinCheck(int original) {
-        return Settings.maxPlayers < 0 ? original : Settings.maxPlayers;
-    }
-    @ModifyReturnValue(method = "getMaxPlayerCount", at = @At("RETURN"))
-    private static int configured$maxPlayers$listing(int original) {
         return Settings.maxPlayers < 0 ? original : Settings.maxPlayers;
     }
 

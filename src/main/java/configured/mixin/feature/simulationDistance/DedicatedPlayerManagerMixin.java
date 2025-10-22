@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(DedicatedPlayerManager.class)
 public class DedicatedPlayerManagerMixin {
 
-    @ModifyExpressionValue(method = "<init>", at = @At(value = "FIELD", target = "Lnet/minecraft/server/dedicated/ServerPropertiesHandler;simulationDistance:I"))
+    @ModifyExpressionValue(method = "<init>", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/dedicated/MinecraftDedicatedServer;getSimulationDistance()I"))
     private static int configured$simulationDistance$init(int original) {
         return Settings.simulationDistance > 0 ? Settings.simulationDistance : original;
     }

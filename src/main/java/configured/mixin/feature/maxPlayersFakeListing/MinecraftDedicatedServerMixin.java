@@ -1,4 +1,4 @@
-package configured.mixin.feature.enableCommandBlock;
+package configured.mixin.feature.maxPlayersFakeListing;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import configured.Settings;
@@ -8,10 +8,8 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(MinecraftDedicatedServer.class)
 public class MinecraftDedicatedServerMixin {
-
-    @ModifyReturnValue(method = "areCommandBlocksEnabled", at = @At("RETURN"))
-    private static boolean configured$forceEnableCommandBlock(boolean original) {
-        return Settings.forceEnableCommandBlock || original;
+    @ModifyReturnValue(method = "getMaxPlayerCount", at = @At("RETURN"))
+    private static int configured$maxPlayersFakeListing$listing(int original) {
+        return Settings.maxPlayersFakeListing < 0 ? original : Settings.maxPlayersFakeListing;
     }
-
 }
