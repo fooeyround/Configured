@@ -13,7 +13,10 @@
     "feature.disablePVP.MinecraftServerMixin",
     "feature.fakeHardcore.PlayerManagerMixin",
     "feature.itemDespawnTimer.ItemEntityMixin",
-    "feature.motd.ServerMetadataMixin"
+    "feature.maxPlayers.PlayerManagerMixin",
+    "feature.maxPlayersFakeListing.PlayerManagerMixin",
+    "feature.motd.ServerMetadataMixin",
+    "feature.simulationDistance.DedicatedPlayerManagerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

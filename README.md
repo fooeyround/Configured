@@ -38,4 +38,13 @@ the `/config configured` command is used to control the settings in game, the co
 
 **itemDespawnAge** - By default minecraft sets this to 5 minutes, or 6000 ticks. Set the item despawn age *in ticks*.
 
+**simulationDistance** - Set the server's simulation distance on the fly.
+
+**viewDistance** - Set the server's view distance on the fly.
+
+**maxPlayers** - Set the max player count on the fly.
+
+**maxPlayersFakeListing** - Set the max player count in the server listing and /list command; does not affect real max player count.
+
+**spawnProtection** - Set the server's overworld spawn protection on the fly.
 
