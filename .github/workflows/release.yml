@@ -38,3 +38,37 @@ jobs:
           done
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract versions from release tag
+        id: extract
+        run: |
+          TAG="${{ github.event.release.tag_name }}"
+          
+          MOD_VERSION=$(echo "$TAG" | sed -E 's/^v([0-9.]+)mc.*/\1/')
+          MC_VERSION=$(echo "$TAG" | sed -E 's/.*mc([0-9.]+)/\1/')
+          FILE="Configured-mc${MC_VERSION}-v${MOD_VERSION}.jar"
+
+          echo "mod_version=$MOD_VERSION" >> "$GITHUB_OUTPUT"
+          echo "mc_version=$MC_VERSION" >> "$GITHUB_OUTPUT"
+          echo "file=output/$FILE" >> "$GITHUB_OUTPUT"
+
+
+
+      - name: Upload to Modrinth
+        uses: cloudnode-pro/modrinth-publish@v2
+        with:
+          token: ${{ secrets.MODRINTH_API_TOKEN }}
+          project: HlpEBg3R
+          name: ${{ github.event.release.name }}
+          version: ${{ github.event.release.tag_name }}
+          changelog: ${{ github.event.release.body }}
+          loaders: |-
+            fabric
+          dependencies: |-
+            [{
+                "project_id": "nqgcleOE",
+                "dependency_type": "embedded"
+            }]
+          game-versions: |-
+            ${{ steps.extract.outputs.mc_version }}
+          files: ${{ steps.extract.outputs.file }}
