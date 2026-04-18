@@ -1,9 +1,9 @@
 package configured.mixin.feature.disableEndPortalFrameFilling;
 
 import configured.Settings;
-import net.minecraft.item.EnderEyeItem;
-import net.minecraft.item.ItemUsageContext;
-import net.minecraft.util.ActionResult;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.item.EnderEyeItem;
+import net.minecraft.world.item.context.UseOnContext;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -13,10 +13,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(EnderEyeItem.class)
 public class EnderEyeItemMixin {
 
-    @Inject(method="useOnBlock",at=@At("HEAD"), cancellable = true)
-    private void configured$conditionalEndPortalFrameFilling(ItemUsageContext context, CallbackInfoReturnable<ActionResult> cir) {
+    @Inject(method="useOn",at=@At("HEAD"), cancellable = true)
+    private void configured$conditionalEndPortalFrameFilling(UseOnContext context, CallbackInfoReturnable<InteractionResult> cir) {
         if (Settings.disableEndPortalFrameFilling) {
-            cir.setReturnValue(ActionResult.PASS);
+            cir.setReturnValue(InteractionResult.PASS);
         }
     }
 

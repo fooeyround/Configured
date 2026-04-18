@@ -3,7 +3,7 @@ package configured.mixin.feature.disableEnd;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import configured.Settings;
-import net.minecraft.block.EndPortalBlock;
+import net.minecraft.world.level.block.EndPortalBlock;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.At;
 public class EndPortalBlockMixin {
 
 
-    @ModifyExpressionValue(method = "onEntityCollision", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;canUsePortals(Z)Z"))
+    @ModifyExpressionValue(method = "entityInside", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;canUsePortal(Z)Z"))
     private boolean configured$conditionalEndPortalTravel(boolean original) {
         return !Settings.disableEnd && original;
     }

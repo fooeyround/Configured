@@ -2,13 +2,14 @@ package configured;
 
 import dev.xpple.betterconfig.api.BetterConfigAPI;
 import dev.xpple.betterconfig.api.ModConfigBuilder;
+
 import net.fabricmc.api.DedicatedServerModInitializer;
 
 
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
-import net.minecraft.command.CommandRegistryAccess;
+import net.minecraft.commands.CommandBuildContext;
+import net.minecraft.commands.CommandSource;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.command.ServerCommandSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,7 +23,7 @@ public class Configured implements DedicatedServerModInitializer {
 
 	@Override
 	public void onInitializeServer() {
-		new ModConfigBuilder<ServerCommandSource, CommandRegistryAccess>("configured", Settings.class).build();
+		new ModConfigBuilder<CommandSource, CommandBuildContext>("configured", Settings.class).build();
 
 
 		ServerLifecycleEvents.END_DATA_PACK_RELOAD.register(

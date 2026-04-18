@@ -1,17 +1,17 @@
 package configured.mixin;
 
 
-import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import configured.Configured;
-import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.dedicated.DedicatedServer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(MinecraftServer.class)
+@Mixin(DedicatedServer.class)
 public class MinecraftServerMixin {
-    @ModifyReturnValue(method = "startServer", at = @At("RETURN"))
-    private static MinecraftServer configured$serverInitCollectInstance(MinecraftServer original) {
-        Configured.MC_SERVER = original;
-        return original;
+    @Inject(method = "initServer", at = @At("HEAD"))
+    private void configured$serverInitCollectInstance(CallbackInfoReturnable<Boolean> cir) {
+        Configured.MC_SERVER = (DedicatedServer)((Object)this);
     }
 }

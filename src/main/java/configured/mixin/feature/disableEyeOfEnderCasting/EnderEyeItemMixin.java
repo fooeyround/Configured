@@ -1,11 +1,10 @@
 package configured.mixin.feature.disableEyeOfEnderCasting;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.EnderEyeItem;
-import net.minecraft.util.Hand;
-import net.minecraft.util.ActionResult;
-
-import net.minecraft.world.World;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.EnderEyeItem;
+import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -17,7 +16,7 @@ import configured.Settings;
 public class EnderEyeItemMixin {
 
     @Inject(method = "use", at = @At(value = "HEAD"), cancellable = true)
-    private void configured$conditionalEnderEyeCasting(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<ActionResult> cir) {
-        if (Settings.disableEyeOfEnderCasting) cir.setReturnValue(ActionResult.PASS);
+    private void configured$conditionalEnderEyeCasting(Level level, Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResult> cir) {
+        if (Settings.disableEyeOfEnderCasting) cir.setReturnValue(InteractionResult.PASS);
     }
 }

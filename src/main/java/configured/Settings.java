@@ -2,12 +2,10 @@ package configured;
 
 
 import dev.xpple.betterconfig.api.Config;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.dedicated.DedicatedServer;
-import net.minecraft.server.dedicated.MinecraftDedicatedServer;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.text.MutableText;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
 
 
 import java.util.ArrayList;
@@ -33,32 +31,33 @@ public class Settings {
 
     @Config(comment = "dedicatedServerOnly", condition = "isDedicated", adder = @Config.Adder(value = "playerListAdder"), remover = @Config.Remover(value = "playerListRemover"), chatRepresentation = "playerListCustomChatRepresentation")
     public static ArrayList<String> playerConnectionBlockList = new ArrayList<>();
-    public static void playerListAdder(String string) {
-        if (Configured.MC_SERVER != null && Configured.MC_SERVER.getApiServices().nameToIdCache() != null) {
-            Configured.MC_SERVER.getApiServices().nameToIdCache().findByName(string).ifPresent(playerConfigEntry -> {
-                String id = playerConfigEntry.id().toString();
 
+    public static void playerListAdder(String string) {
+        if (Configured.MC_SERVER != null && Configured.MC_SERVER.services().nameToIdCache() != null) {
+            Configured.MC_SERVER.services().nameToIdCache().get(string).ifPresent(playerConfigEntry -> {
+                String id = playerConfigEntry.id().toString();
                 if (!playerConnectionBlockList.contains(id)) {
                     playerConnectionBlockList.add(id);
                 }
-
             });
         }
     }
+
     public static void playerListRemover(String string) {
-        if (Configured.MC_SERVER != null && Configured.MC_SERVER.getApiServices().nameToIdCache() != null){
-            Configured.MC_SERVER.getApiServices().nameToIdCache().findByName(string).ifPresent(playerConfigEntry -> playerConnectionBlockList.remove(playerConfigEntry.id().toString()));
+        if (Configured.MC_SERVER != null && Configured.MC_SERVER.services().nameToIdCache() != null){
+            Configured.MC_SERVER.services().nameToIdCache().get(string).ifPresent(playerConfigEntry -> playerConnectionBlockList.remove(playerConfigEntry.id().toString()));
         }
     }
-    private static Text playerListCustomChatRepresentation() {
-        if (Configured.MC_SERVER == null || Configured.MC_SERVER.getApiServices().nameToIdCache() == null) throw new IllegalStateException("Minecraft Server reference and user cache should not be null in the context of running a configured command\nPlease report this as a bug!");
-        MutableText text = Text.literal("[");
+
+    private static Component playerListCustomChatRepresentation() {
+        if (Configured.MC_SERVER == null || Configured.MC_SERVER.services().nameToIdCache() == null) throw new IllegalStateException("Minecraft Server reference and user cache should not be null in the context of running a configured command\nPlease report this as a bug!");
+        MutableComponent text = Component.literal("[");
         for (int i = 0; i < playerConnectionBlockList.size(); i++) {
             final int j = i;
-            Configured.MC_SERVER.getApiServices().nameToIdCache().getByUuid(UUID.fromString(playerConnectionBlockList.get(i))).ifPresent(playerConfigEntry -> {
+            Configured.MC_SERVER.services().nameToIdCache().get(UUID.fromString(playerConnectionBlockList.get(i))).ifPresent(playerConfigEntry -> {
                 String name = playerConfigEntry.name();
                 text.append(name);
-                if (j != playerConnectionBlockList.size()-1) text.append(", ");
+                if (j != playerConnectionBlockList.size() - 1) text.append(", ");
             });
 
 
@@ -70,41 +69,36 @@ public class Settings {
     public static void setSimulationDistance(int value) {
         simulationDistance = value;
         if (value > 0) {
-            Configured.MC_SERVER.getPlayerManager().setSimulationDistance(value);
+            Configured.MC_SERVER.getPlayerList().setSimulationDistance(value);
         } else {
-            if (Configured.MC_SERVER instanceof MinecraftDedicatedServer dedicatedServer) {
+            if (Configured.MC_SERVER instanceof DedicatedServer dedicatedServer) {
                 dedicatedServer.setSimulationDistance(dedicatedServer.getProperties().simulationDistance.get());
             } else {
                 Configured.LOGGER.error("Simulation Distance failed to reset in non-dedicated setting. Please use the video settings menu. If you are running a dedicated server, please report this as a bug.");
             }
 
         }
-
-
     }
 
     public static void setViewDistance(int value) {
         viewDistance = value;
         if (value > 0) {
-            Configured.MC_SERVER.getPlayerManager().setViewDistance(value);
+            Configured.MC_SERVER.getPlayerList().setViewDistance(value);
         } else {
-            if (Configured.MC_SERVER instanceof MinecraftDedicatedServer dedicatedServer) {
-                Configured.MC_SERVER.getPlayerManager().setViewDistance(dedicatedServer.getProperties().viewDistance.get());
+            if (Configured.MC_SERVER instanceof DedicatedServer dedicatedServer) {
+                Configured.MC_SERVER.getPlayerList().setViewDistance(dedicatedServer.getProperties().viewDistance.get());
             } else {
                 Configured.LOGGER.error("View Distance failed to reset in non-dedicated setting. Please use the video settings menu. If you are running a dedicated server, please report this as a bug.");
             }
         }
     }
 
-
-
-
-    private static Text dedicatedServerOnly() {
-        return Text.literal("This feature may only work correctly on a dedicated server.").formatted(Formatting.GOLD);
+    private static Component dedicatedServerOnly() {
+        return Component.literal("This feature may only work correctly on a dedicated server.").withStyle(ChatFormatting.GOLD);
     }
+
     private static boolean isDedicated() {
-        return Configured.MC_SERVER instanceof MinecraftDedicatedServer;
+        return Configured.MC_SERVER instanceof DedicatedServer;
     }
-
 
 }
