@@ -46,3 +46,5 @@ the `/config configured` command is used to control the settings in game, the co
 
 **spawnProtection** - Set the server's overworld spawn protection on the fly.
 
+**tntMinecartDamageMultiplier** - Allows server owners to tweak damage by tnt minecarts.
+

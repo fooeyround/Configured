@@ -1,6 +1,7 @@
 package configured;
 
 
+import com.mojang.authlib.GameProfile;
 import dev.xpple.betterconfig.api.Config;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -9,6 +10,8 @@ import net.minecraft.server.dedicated.DedicatedServer;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 public class Settings {
@@ -21,36 +24,42 @@ public class Settings {
     @Config public static boolean disableEyeOfEnderCasting = false;
     @Config public static boolean disableEndGateways = false;
     @Config public static int itemDespawnAge = 6000;
-    @Config(comment = "dedicatedServerOnly", condition = "isDedicated", setter = @Config.Setter("setSimulationDistance")) public static int simulationDistance = 0;
-    @Config(comment = "dedicatedServerOnly",  condition = "isDedicated", setter = @Config.Setter("setViewDistance"))  public static int viewDistance = 0;
-    @Config(comment = "dedicatedServerOnly", condition = "isDedicated") public static int maxPlayers = -1;
-    @Config(comment = "dedicatedServerOnly", condition = "isDedicated") public static int maxPlayersFakeListing = -1;
-    @Config(comment = "dedicatedServerOnly", condition = "isDedicated") public static int spawnProtection = -1;
+    @Config(setter = @Config.Setter("setSimulationDistance")) public static int simulationDistance = 0;
+    @Config(setter = @Config.Setter("setViewDistance"))  public static int viewDistance = 0;
+    @Config public static int maxPlayers = -1;
+    @Config public static int maxPlayersFakeListing = -1;
+    @Config public static int spawnProtection = -1;
+    @Config public static SettingTypes.LocatorBarPlayerVisibility locatorBarPlayerVisibility = SettingTypes.LocatorBarPlayerVisibility.ALL;
 
-    @Config(comment = "dedicatedServerOnly", condition = "isDedicated") public static SettingTypes.PlayerConnectionSetting playerConnections = SettingTypes.PlayerConnectionSetting.ALLOW_ALL;
+    @Config public static Map<SettingTypes.PlayerDamageMultiplierType, Float> playerDamageMultiplier = new HashMap<>();
 
-    @Config(comment = "dedicatedServerOnly", condition = "isDedicated", adder = @Config.Adder(value = "playerListAdder"), remover = @Config.Remover(value = "playerListRemover"), chatRepresentation = "playerListCustomChatRepresentation")
+
+    @Config public static SettingTypes.PlayerConnectionSetting playerConnections = SettingTypes.PlayerConnectionSetting.ALLOW_ALL;
+
+    @Config(adder = @Config.Adder(value = "playerListAdder"), remover = @Config.Remover(value = "playerListRemover"), chatRepresentation = "playerListCustomChatRepresentation")
     public static ArrayList<String> playerConnectionBlockList = new ArrayList<>();
 
+    @Config
+    public static ArrayList<GameProfile> playerConnectionBlockListTwo = new ArrayList<>();
+
+
     public static void playerListAdder(String string) {
-        if (Configured.MC_SERVER != null && Configured.MC_SERVER.services().nameToIdCache() != null) {
-            Configured.MC_SERVER.services().nameToIdCache().get(string).ifPresent(playerConfigEntry -> {
-                String id = playerConfigEntry.id().toString();
-                if (!playerConnectionBlockList.contains(id)) {
-                    playerConnectionBlockList.add(id);
-                }
-            });
-        }
+        if (Configured.MC_SERVER == null) throw new IllegalStateException("Minecraft Server reference should not be null in the context of running a configured command\nPlease report this as a bug!");
+        Configured.MC_SERVER.services().nameToIdCache().get(string).ifPresent(playerConfigEntry -> {
+            String id = playerConfigEntry.id().toString();
+            if (!playerConnectionBlockList.contains(id)) {
+                playerConnectionBlockList.add(id);
+            }
+        });
     }
 
     public static void playerListRemover(String string) {
-        if (Configured.MC_SERVER != null && Configured.MC_SERVER.services().nameToIdCache() != null){
-            Configured.MC_SERVER.services().nameToIdCache().get(string).ifPresent(playerConfigEntry -> playerConnectionBlockList.remove(playerConfigEntry.id().toString()));
-        }
+        if (Configured.MC_SERVER == null) throw new IllegalStateException("Minecraft Server reference should not be null in the context of running a configured command\nPlease report this as a bug!");
+        Configured.MC_SERVER.services().nameToIdCache().get(string).ifPresent(playerConfigEntry -> playerConnectionBlockList.remove(playerConfigEntry.id().toString()));
     }
 
     private static Component playerListCustomChatRepresentation() {
-        if (Configured.MC_SERVER == null || Configured.MC_SERVER.services().nameToIdCache() == null) throw new IllegalStateException("Minecraft Server reference and user cache should not be null in the context of running a configured command\nPlease report this as a bug!");
+        if (Configured.MC_SERVER == null) throw new IllegalStateException("Minecraft Server reference should not be null in the context of running a configured command\nPlease report this as a bug!");
         MutableComponent text = Component.literal("[");
         for (int i = 0; i < playerConnectionBlockList.size(); i++) {
             final int j = i;
@@ -93,10 +102,12 @@ public class Settings {
         }
     }
 
+    @Deprecated
     private static Component dedicatedServerOnly() {
         return Component.literal("This feature may only work correctly on a dedicated server.").withStyle(ChatFormatting.GOLD);
     }
 
+    @Deprecated
     private static boolean isDedicated() {
         return Configured.MC_SERVER instanceof DedicatedServer;
     }

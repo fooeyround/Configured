@@ -3,7 +3,7 @@
 	"id": "configured",
 	"version": "${version}",
 	"name": "Configured",
-	"description": "Take control over minecraft's features.",
+	"description": "Take control over Minecraft's features.",
 	"authors": [
 		"fooeyround"
 	],

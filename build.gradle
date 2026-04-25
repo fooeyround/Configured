@@ -42,7 +42,6 @@ loom {
 	mods {
 		"configured" {
 			sourceSet sourceSets.main
-			sourceSet sourceSets.client
 		}
 	}
 
