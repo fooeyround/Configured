@@ -39,9 +39,7 @@ public class Settings {
     @Config(adder = @Config.Adder(value = "playerListAdder"), remover = @Config.Remover(value = "playerListRemover"), chatRepresentation = "playerListCustomChatRepresentation")
     public static ArrayList<String> playerConnectionBlockList = new ArrayList<>();
 
-    @Config
-    public static ArrayList<GameProfile> playerConnectionBlockListTwo = new ArrayList<>();
-
+//    @Config public static ArrayList<GameProfile> playerConnectionBlockListTwo = new ArrayList<>();
 
     public static void playerListAdder(String string) {
         if (Configured.MC_SERVER == null) throw new IllegalStateException("Minecraft Server reference should not be null in the context of running a configured command\nPlease report this as a bug!");
