@@ -39,6 +39,12 @@ public class Settings {
     @Config(adder = @Config.Adder(value = "playerListAdder"), remover = @Config.Remover(value = "playerListRemover"), chatRepresentation = "playerListCustomChatRepresentation")
     public static ArrayList<String> playerConnectionBlockList = new ArrayList<>();
 
+    @Config public static int playerCombatCooldown = 0;
+    @Config public static boolean playerCombatCooldownForAttacker = false;
+    @Config public static boolean playerCombatCooldownForVictim = false;
+    @Config public static boolean playerCombatCooldownShowInActionBar = false;
+    @Config public static boolean playerCombatDisableElytra = false;
+
 //    @Config public static ArrayList<GameProfile> playerConnectionBlockListTwo = new ArrayList<>();
 
     public static void playerListAdder(String string) {
