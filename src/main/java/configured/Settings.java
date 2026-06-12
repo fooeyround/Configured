@@ -44,6 +44,7 @@ public class Settings {
     @Config public static boolean playerCombatCooldownForVictim = false;
     @Config public static boolean playerCombatCooldownShowInActionBar = false;
     @Config public static boolean playerCombatDisableElytra = false;
+    @Config public static boolean playerCombatDisableElytraFireworkRockets = false;
 
 //    @Config public static ArrayList<GameProfile> playerConnectionBlockListTwo = new ArrayList<>();
 

@@ -15,6 +15,7 @@
     "feature.maxPlayers.PlayerListMixin",
     "feature.maxPlayersFakeListing.DedicatedServerMixin",
     "feature.motd.ServerStatusMixin",
+    "feature.playerCombatCooldown.FireworkRocketItemMixin",
     "feature.playerCombatCooldown.LivingEntityMixin",
     "feature.playerCombatCooldown.ServerPlayerMixin",
     "feature.playerDamageMultiplier.ServerPlayerMixin",
