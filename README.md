@@ -34,7 +34,7 @@ the `/config configured` command is used to control the settings in game, the co
 
 **disableEndGateways** - Disables teleporting of any entity through End Gateways, disabling their full functionality.
 
-**itemDespawnAge** - By default minecraft sets this to 5 minutes, or 6000 ticks. Set the item despawn age *in ticks*
+**itemDespawnAge** - By default Minecraft sets this to 5 minutes, or 6000 ticks. Set the item despawn age *in ticks*
 
 **simulationDistance** - Set the server's simulation distance on the fly.
 
@@ -46,5 +46,22 @@ the `/config configured` command is used to control the settings in game, the co
 
 **spawnProtection** - Set the server's overworld spawn protection on the fly.
 
-**tntMinecartDamageMultiplier** - Allows server owners to tweak damage by tnt minecarts.
+**playerDamageMultiplier** - Set a multiplier for some groups of damage types to players.
+> This is useful for nerfing or buffing some game mechanics. \
+>  The damage types that can currently be editable are as follows:
+> - `end_crystal` Modify end crystal damage for players
+> - `bad_respawn_point` Modify respawn anchor/bed damage for players
+> - `tnt_minecart` Modify TNT Minecart damage for players
 
+
+**playerCombatCooldown** - Set the duration of the combat timer applied when players engage in PvP. Set *in ticks*, `0` disables the combat cooldown entirely.
+
+**playerCombatCooldownForAttacker** - Apply the combat cooldown to the attacking player when they damage another player.
+
+**playerCombatCooldownForVictim** - Apply the combat cooldown to the victim player when they are damaged by another player.
+
+**playerCombatCooldownShowInActionBar** - Display the remaining combat cooldown time in the player's action bar while they are in combat.
+
+**playerCombatDisableElytra** - Prevent players in combat from using Elytra flight while the combat cooldown is active.
+
+**playerCombatDisableElytraFireworkRockets** - Prevent players in combat from using Firework Rockets to boost Elytra flight while the combat cooldown is active.
